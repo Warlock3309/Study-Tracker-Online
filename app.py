@@ -2,8 +2,8 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-usuarios = {"daniel": "1234"}
-print(usuarios)
+users = {"dan": "1234"}
+print(users)
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -14,23 +14,23 @@ def login_page():
 def create():
     if request.method == "GET":
         return render_template("create.html")
-    nome = request.form.get("nome")
+    name = request.form.get("name")
     senha = request.form.get("senha")
-    usuarios
-    if nome in usuarios:
+    users
+    if name in users:
         return "Usuário já existe"
 
-    usuarios[nome] = senha
+    users[name] = senha
 
     return "Conta criada! Agora faça login."
 
 @app.route("/auth", methods=["POST"])
 def auth():
-    nome = request.form.get("nome")
+    name = request.form.get("name")
     senha = request.form.get("senha")
 
-    if nome in usuarios and usuarios[nome] == senha:
-        return f"Welcome!, {nome}"
+    if name in users and users[name] == senha:
+        return f"Welcome!, {name}"
     else:
         return "Login Wrong"
 if __name__ == "__main__":
